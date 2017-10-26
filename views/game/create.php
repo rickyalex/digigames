@@ -10,7 +10,7 @@ $this->title = 'Create Game';
 $this->params['breadcrumbs'][] = ['label' => 'Game', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="box">
+<div class="form-container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

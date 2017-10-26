@@ -1,8 +1,5 @@
 /* Form */
-.box{
-    margin: 100px auto;
-    padding: 30px;
-}
+
 #login-form {
   position: relative;
   z-index: 1;
@@ -141,4 +138,9 @@ body:before {
 
 .body-content{
     position:relative;
+}
+
+.form-container{
+    margin: 100px auto;
+    padding: 30px;
 }

@@ -10,7 +10,7 @@ $this->title = 'Create Cover';
 $this->params['breadcrumbs'][] = ['label' => 'Covers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="box">
+<div class="form-container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

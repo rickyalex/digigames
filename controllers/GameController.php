@@ -9,33 +9,40 @@ use app\models\GameSearch;
 
 class GameController extends Controller
 {
+    public $model;
+    public $modelSearch;
+    
+    public function __construct($id, $module, $config = array()) {
+        $this->model = new Game();
+        $this->modelSearch = new GameSearch();
+        parent::__construct($id, $module, $config);
+    }      
+    
     public function actionCreate()
     {
-        $model = new Game();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+        if ($this->model->load(Yii::$app->request->post())) {
+            $this->model->save();
             return $this->redirect(['index']);
         }
         
         return $this->render('create', [
-            'model' => $model
+            'model' => $this->model
         ]);
     }
 
     public function actionIndex()
     {
-        $gameSearch = new GameSearch();
-        $dataProvider = $gameSearch->search(Yii::$app->request->get());
+        $dataProvider = $this->modelSearch->search(Yii::$app->request->get());
         
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'searchModel' => $gameSearch,
+            'searchModel' => $this->modelSearch,
         ]);
     }
 
-    public function actionRemove()
+    public function actionDelete($id)
     {
-        $model = $this->findModel($id)->delete();
+        Game::findOne($id)->delete();
         return $this->redirect(['index']);
     }
 
@@ -44,14 +51,21 @@ class GameController extends Controller
         return $this->render('search');
     }
 
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
-        return $this->render('update', [
-            'model' => Game::findOne($id),
-        ]);
+        $model = Game::findOne($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            return $this->redirect(['index']);
+        }
+        else{
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
-    public function actionView()
+    public function actionView($id)
     {
         return $this->render('view', [
             'model' => Game::findOne($id),

@@ -9,34 +9,41 @@ use app\models\CommentsSearch;
 
 class CommentsController extends Controller
 {
+    public $model;
+    public $modelSearch;
+    
+    public function __construct($id, $module, $config = array()) {
+        $this->model = new Comments();
+        $this->modelSearch = new CommentsSearch();
+        parent::__construct($id, $module, $config);
+    } 
+    
     public function actionCreate()
     {
-        $model = new Comments();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+        if ($this->model->load(Yii::$app->request->post())) {
+            $this->model->save();
             return $this->redirect(['index']);
         }
         
         return $this->render('create', [
-            'model' => $model
+            'model' => $this->model
         ]);
     }
 
     public function actionIndex()
     {
-        $commentsSearch = new CommentsSearch();
-        $dataProvider = $commentsSearch->search(Yii::$app->request->get());
+        $dataProvider = $this->modelSearch->search(Yii::$app->request->get());
         
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'searchModel' => $commentsSearch,
+            'searchModel' => $this->modelSearch,
         ]);
         return $this->render('index');
     }
 
-    public function actionRemove()
+    public function actionDelete()
     {
-        $model = $this->findModel($id)->delete();
+        Comments::findOne($id)->delete();
         return $this->redirect(['index']);
     }
 
@@ -47,9 +54,16 @@ class CommentsController extends Controller
 
     public function actionUpdate()
     {
-        return $this->render('update', [
-            'model' => Comments::findOne($id),
-        ]);
+        $model = Comments::findOne($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            return $this->redirect(['index']);
+        }
+        else{
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     public function actionView()

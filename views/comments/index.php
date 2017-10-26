@@ -17,7 +17,7 @@ $this->title = 'Comments';
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 <link rel="stylesheet" href="css/style.css">
 
-<div class="box">
+<div class="form-container">
     <?= Html::a(Yii::t('app', 'Add', [
         'modelClass' => 'Comment',
         ]), ['create'], ['class' => 'btn btn-success']) ?>

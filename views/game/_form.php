@@ -17,6 +17,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'caption')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'genre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'image_link')->textInput(['maxlength' => true]) ?>
 

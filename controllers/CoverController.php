@@ -9,34 +9,40 @@ use app\models\CoverSearch;
 
 class CoverController extends Controller
 {
-
+    public $model;
+    public $modelSearch;
+    
+    public function __construct($id, $module, $config = array()) {
+        $this->model = new Cover();
+        $this->modelSearch = new CoverSearch();
+        parent::__construct($id, $module, $config);
+    } 
+    
     public function actionIndex()
     {
-        $coverSearch = new CoverSearch();
-        $dataProvider = $coverSearch->search(Yii::$app->request->get());
+        $dataProvider = $this->modelSearch->search(Yii::$app->request->get());
         
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'searchModel' => $coverSearch,
+            'searchModel' => $this->modelSearch,
         ]);
     }
     
     public function actionCreate()
     {
-        $model = new Cover();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+        if ($this->model->load(Yii::$app->request->post())) {
+            $this->model->save();
             return $this->redirect(['index']);
         }
         
         return $this->render('create', [
-            'model' => $model
+            'model' => $this->model
         ]);
     }
 
-    public function actionRemove($id)
+    public function actionDelete($id)
     {
-        $model = $this->findModel($id)->delete();
+        Cover::findOne($id)->delete();
         return $this->redirect(['index']);
     }
 
@@ -47,9 +53,16 @@ class CoverController extends Controller
 
     public function actionUpdate($id)
     {
-        return $this->render('update', [
-            'model' => Cover::findOne($id),
-        ]);
+        $model = Cover::findOne($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            return $this->redirect(['index']);
+        }
+        else{
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     public function actionView($id)
