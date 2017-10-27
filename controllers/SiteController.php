@@ -13,6 +13,7 @@ use app\models\Users;
 use app\models\Cover;
 use app\models\CoverSearch;
 use app\models\Game;
+use app\models\Comments;
 use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
@@ -71,6 +72,31 @@ class SiteController extends Controller
         return $this->render('index', [
             'covers' => $covers,
             'games' => $games,
+        ]);
+    }
+    
+    /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionDetail($id)
+    {
+        $result = Game::findOne($id);
+        $comments = Comments::find()->where(['game_id' => $id])->all();
+        $commentModel = new Comments();
+        $gameModel = new Game();
+        $usersModel = new Users();
+        foreach($result as $row => $item){
+            $game[$row] = $item;
+        }
+        //die(print_r($game));
+        return $this->render('detail', [
+            'game' => $game,
+            'comments' => $comments,
+            'commentModel' => $commentModel,
+            'gameModel' => $gameModel,
+            'usersModel' => $usersModel
         ]);
     }
 

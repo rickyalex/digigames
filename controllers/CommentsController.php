@@ -22,10 +22,21 @@ class CommentsController extends Controller
     {
         if ($this->model->load(Yii::$app->request->post())) {
             $this->model->save();
-            return $this->redirect(['index']);
+            //return $this->redirect(['index']);
         }
         
         return $this->render('create', [
+            'model' => $this->model
+        ]);
+    }
+    
+    public function actionSubmit()
+    {
+        if ($this->model->load(Yii::$app->request->post())) {
+            $this->model->save();
+            //return $this->redirect(['index']);
+        }
+        return $this->render('index', [
             'model' => $this->model
         ]);
     }
@@ -38,10 +49,9 @@ class CommentsController extends Controller
             'dataProvider' => $dataProvider,
             'searchModel' => $this->modelSearch,
         ]);
-        return $this->render('index');
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
         Comments::findOne($id)->delete();
         return $this->redirect(['index']);
@@ -52,7 +62,7 @@ class CommentsController extends Controller
         return $this->render('search');
     }
 
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
         $model = Comments::findOne($id);
         if ($model->load(Yii::$app->request->post())) {
@@ -66,7 +76,7 @@ class CommentsController extends Controller
         }
     }
 
-    public function actionView()
+    public function actionView($id)
     {
         return $this->render('view', [
             'model' => Comments::findOne($id),

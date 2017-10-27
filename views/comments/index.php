@@ -35,10 +35,6 @@ $this->title = 'Comments';
             'label' => 'Comment',
             'filter' => false,
         ],
-        [
-            'attribute' => 'url',
-            'label' => 'URL',
-        ],
         ['class' => 'yii\grid\ActionColumn'],
     ]
 ]); ?>

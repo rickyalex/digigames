@@ -14,9 +14,9 @@ $this->title = 'My Yii Application';
                 <?php $covers = isset($covers) ? $covers : array(); ?>
                 <?php if (!empty($covers)) { ?>
                     <?php foreach ($covers as $cover => $item): ?>
-                        <?php if ($cover === 0) { ?> <div class="item active">
-                        <?php } else  ?> <div class="item">
-                                <img src="<?= $item->image_link ?>" alt="Chania">
+                        <?php if ($cover === 0) { ?> <div class="item active"> 
+                        <?php } else { ?> <div class="item"> <?php } ?>
+                            <img src="<?= $item->image_link ?>" alt="Chania">
                                 <div class="carousel-caption">
                                     <h3><?php echo $item->caption; ?></h3>
                                 </div>
@@ -51,7 +51,7 @@ $this->title = 'My Yii Application';
                         <div class="col-sm-4 col-md-4 box col-lg-4 box">
                                 <span class="box-title">User Reviews</span>
                                 <div class="box-pic">
-                                    <img src="<?= $item->image_link ?>" />
+                                    <a href="<?= $item->url ?>"><img src="<?= $item->image_link ?>" /></a>
                                 </div>
                                 <p class="caption"><b><?php echo $item->caption; ?></b><p>
                             </div>

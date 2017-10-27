@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Comments */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Commentss', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="form-container">

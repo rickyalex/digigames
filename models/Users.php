@@ -120,6 +120,16 @@ class Users extends ActiveRecord implements IdentityInterface
         return $this->username;
     }
     
+    public function getUsernameById($id)
+    {
+        $result = self::findOne(['id_user' => $id]);
+        foreach($result as $row => $item){
+            $username = $result['username'];
+        }
+        
+        return $username;
+    }
+    
     /**
      * Set the current timestamp
      *

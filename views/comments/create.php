@@ -6,33 +6,16 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comments */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Commentss', 'url' => ['index']];
+$this->title = 'Create Comments';
+$this->params['breadcrumbs'][] = ['label' => 'Comments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="form-container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
+    <?= $this->render('_form', [
         'model' => $model,
-        'attributes' => [
-            'id',
-            'caption',
-            'image_link',
-            'url:url',
-        ],
     ]) ?>
 
 </div>

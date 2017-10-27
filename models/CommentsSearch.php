@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
-use \app\models\Game;
+use \app\models\Comments;
 
 /**
  * This is the model class for table "cover".
