@@ -101,6 +101,11 @@ a.desc:after {
     border: none;
 }
 
+
+div.box{
+  height:300px;
+}
+
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;
@@ -117,4 +122,40 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+    
+    div.box{
+        height:200px;
+      }
+}
+
+
+.box-title{
+    left:0;
+    margin-left:15px;
+    position:absolute;
+    display:inline-block;
+    background-color:red;
+    color:#fff;
+    height:40px;
+    width:120px;
+    text-align:center;
+    vertical-align:middle;
+    line-height:40px;
+}
+.box-pic{
+    height:auto;
+}
+
+.box-pic img{
+    height:auto;
+    width:110%;
+}
+
+p.caption {
+  position:absolute;
+  padding: 20px;
+  background-color: #222;
+  color: #fff;
+  height:80px;
+  width:100%;
 }

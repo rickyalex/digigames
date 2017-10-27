@@ -1,81 +1,70 @@
 <?php
-
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    
-<div class="jumbotron">
+
+    <div class="jumbotron">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-              <div class="item active">
-                <img src="assets/images/cover1.jpg" alt="Chania">
-                <div class="carousel-caption">
-                  <h3>Los Angeles</h3>
-                  <p>LA is always so much fun!</p>
+                <?php $covers = isset($covers) ? $covers : array(); ?>
+                <?php if (!empty($covers)) { ?>
+                    <?php foreach ($covers as $cover => $item): ?>
+                        <?php if ($cover === 0) { ?> <div class="item active">
+                        <?php } else  ?> <div class="item">
+                                <img src="<?= $item->image_link ?>" alt="Chania">
+                                <div class="carousel-caption">
+                                    <h3><?php echo $item->caption; ?></h3>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php }else { ?>
+                        <div class="item active">
+                            <img src="assets/images/empty.jpg" alt="Chania">
+                            <div class="carousel-caption">
+                                <h3>No Image, please add through the cover module !</h3>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-              </div>
-
-              <div class="item">
-                <img src="assets/images/cover2.jpg" alt="Chania">
-                <div class="carousel-caption">
-                  <h3>Chicago</h3>
-                  <p>Thank you, Chicago!</p>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="assets/images/cover3.jpg" alt="Chania">
-                <div class="carousel-caption">
-                  <h3>New York</h3>
-                  <p>We love the Big Apple!</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-    </div>
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4 box">
-                <span class="box-title">User Reviews</span>
-                <div class="box-pic">
-                    <img src="assets/images/box1.jpg" />
-                </div>
-
-                <p class="caption"><b>The Largest RTS Community</b><p>
-            </div>
-            <div class="col-lg-4 box">
-                <span class="box-title">User Reviews</span>
-                <div class="box-pic">
-                    <img src="assets/images/box2.jpg" />
-                </div>
-
-                <p class="caption"><b>Titanfall 2</b></p>
-            </div>
-            <div class="col-lg-4 box">
-                <span class="box-title">User Reviews</span>
-                <div class="box-pic">
-                    <img src="assets/images/box3.jpg" />
-                </div>
-
-                <p class="caption"><b>The Birds Are Still Angry</b></p>
             </div>
         </div>
-
-    </div>
-</div>
+            <div class="body-content">
+                <?php $games = isset($games) ? $games : array(); ?>
+                <?php if (!empty($games)) { 
+                        $limit = count($games); $x=0; foreach ($games as $game => $item): 
+                        if ($game % 3 === 0) { ?> <div class="row"> <?php } ?>
+                        <div class="col-sm-4 col-md-4 box col-lg-4 box">
+                                <span class="box-title">User Reviews</span>
+                                <div class="box-pic">
+                                    <img src="<?= $item->image_link ?>" />
+                                </div>
+                                <p class="caption"><b><?php echo $item->caption; ?></b><p>
+                            </div>
+                        <?php if (($x == $limit) || ($game != 0 && $game % 3 === 0)){ ?> </div> <?php } ?>
+                        <?php $x++; endforeach; ?>
+                            <?php }else { ?>
+                        <div class="row"><div class="col-sm-4 col-md-4 box col-lg-4 box">
+                            <span class="box-title">User Reviews</span>
+                                <div class="box-pic">
+                                    <img src="assets/images/box_empty.jpg" />
+                                </div>
+                                <p class="caption"><b>No games yet, add through the game module !</b><p>
+                                    </div></div>
+                        <?php } ?>
+            </div>
+        </div>

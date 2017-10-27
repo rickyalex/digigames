@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\Users;
 use app\models\Cover;
 use app\models\CoverSearch;
+use app\models\Game;
 use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
@@ -65,7 +66,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $covers = Cover::find()->all();
+        $games = Game::find()->all();
+        return $this->render('index', [
+            'covers' => $covers,
+            'games' => $games,
+        ]);
     }
 
     /**
