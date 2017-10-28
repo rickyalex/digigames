@@ -13,8 +13,8 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'caption')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'image_link')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'image_link')->fileInput() ?> <p>*recommended size is 1920 x 600</p>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 

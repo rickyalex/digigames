@@ -30,7 +30,8 @@ class Cover extends ActiveRecord
     public function rules()
     {
         return [
-            [['caption', 'image_link', 'url'], 'string', 'max' => 200],
+            [['caption', 'url'], 'string', 'max' => 200],
+            [['image_link'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
     }
 
@@ -46,6 +47,5 @@ class Cover extends ActiveRecord
             'url' => 'Url',
         ];
     }
-    
     
 }

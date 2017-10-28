@@ -16,11 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="game-title"><h3><?= Html::encode($this->title) ?></h3></div>
         </div>
     </div>
-    
-
+                       
     <div class="row">
         <div class="col-lg-6">
-            <img src="<?= $game['image_link']; ?>"/>
+            <img class="game-image" src="<?= $game['image_link']; ?>"/>
         </div>
         <div class="col-lg-6">
             <h3>Description</h3>
@@ -66,13 +65,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'template' => "{label}\n<div class=\"col-lg-6\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>",
                                         'labelOptions' => ['class' => 'col-lg-3 control-label'],
                                     ],
-                            'action' => ['comments/submit']
                         ]);
                         ?>
-            <?= Html::hiddenInput("Comments['created_by']", Yii::$app->user->identity->id_user); ?>
+            <?= Html::hiddenInput("Comments[game_id]", $game['id']); ?>
+            <?= Html::hiddenInput("Comments[created_by]", Yii::$app->user->identity->id_user); ?>
             <?= $form->field($commentModel, 'comment')->textInput(['class' => 'string', 'size' => 50, 'placeholder' => 'Add Your Comment Here']) ?>
             <?= Html::submitButton('Submit', ['class' => 'sumbit', 'name' => 'comment-button']) ?>
             <?php ActiveForm::end(); ?>
+            <?php } else { ?>
+                <label>Login to comment</label>
             <?php } ?>
             </div>
             <?php } ?>

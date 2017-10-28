@@ -20,9 +20,7 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'genre')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image_link')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image_link')->fileInput() ?> <p>*recommended size is 450 x 220</p>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Game;
 use app\models\GameSearch;
+use yii\web\UploadedFile;
 
 class GameController extends Controller
 {
@@ -20,9 +21,21 @@ class GameController extends Controller
     
     public function actionCreate()
     {
+        
         if ($this->model->load(Yii::$app->request->post())) {
-            $this->model->save();
-            return $this->redirect(['index']);
+            //get the last ID of the table, the last ID is generated on create
+            $last_id = $this->model->getLastID();
+            //randomize the url
+            $this->model->url = 'index.php?r=site%2Fdetail&id='.$last_id[0]['last_id'];
+            //get the instance of the image
+            $image = UploadedFile::getInstance($this->model, 'image_link');
+            //get the image name
+            $this->model->image_link = 'assets/images/'.$image->baseName.'.'.$image->extension;
+            //validate the save before uploading the image
+            if($this->model->save()){
+                $image->saveAs($this->model->image_link);
+                return self::actionIndex();
+            }
         }
         
         return $this->render('create', [
@@ -42,7 +55,7 @@ class GameController extends Controller
 
     public function actionDelete($id)
     {
-        Game::findOne($id)->delete();
+        $this->model->findOne($id)->delete();
         return $this->redirect(['index']);
     }
 
@@ -53,7 +66,7 @@ class GameController extends Controller
 
     public function actionUpdate($id)
     {
-        $model = Game::findOne($id);
+        $model = $this->model->findOne($id);
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
             return $this->redirect(['index']);
@@ -68,7 +81,7 @@ class GameController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => Game::findOne($id),
+            'model' => $this->model->findOne($id),
         ]);
     }
 

@@ -46,8 +46,8 @@ $this->title = 'My Yii Application';
             <div class="body-content">
                 <?php $games = isset($games) ? $games : array(); ?>
                 <?php if (!empty($games)) { 
-                        $limit = count($games); $x=0; foreach ($games as $game => $item): 
-                        if ($game % 3 === 0) { ?> <div class="row"> <?php } ?>
+                        $limit = count($games); $x=0; $row=1; foreach ($games as $game => $item): 
+                        if ($x % 3 === 0) { $row = $row +1; ?> <div class="row"> <?php } ?>
                         <div class="col-sm-4 col-md-4 box col-lg-4 box">
                                 <span class="box-title">User Reviews</span>
                                 <div class="box-pic">
@@ -55,7 +55,7 @@ $this->title = 'My Yii Application';
                                 </div>
                                 <p class="caption"><b><?php echo $item->caption; ?></b><p>
                             </div>
-                        <?php if (($x == $limit) || ($game != 0 && $game % 3 === 0)){ ?> </div> <?php } ?>
+                        <?php if (($x == $limit) || ($x != 0 && $x/(3*($row+1)) === 1)){ ?> </div> <?php } ?>
                         <?php $x++; endforeach; ?>
                             <?php }else { ?>
                         <div class="row"><div class="col-sm-4 col-md-4 box col-lg-4 box">

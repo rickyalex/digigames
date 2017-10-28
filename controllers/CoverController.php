@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Cover;
 use app\models\CoverSearch;
+use yii\web\UploadedFile;
 
 class CoverController extends Controller
 {
@@ -31,7 +32,15 @@ class CoverController extends Controller
     public function actionCreate()
     {
         if ($this->model->load(Yii::$app->request->post())) {
-            $this->model->save();
+            //get the instance of the image
+            $image = UploadedFile::getInstance($this->model, 'image_link');
+            //get the image name
+            $this->model->image_link = 'assets/images/'.$image->baseName.'.'.$image->extension;
+            //validate the save before uploading the image
+            if($this->model->save()){
+                $image->saveAs($this->model->image_link);
+            }
+
             return $this->redirect(['index']);
         }
         
@@ -72,5 +81,15 @@ class CoverController extends Controller
         ]);
     }
     
-    
+    public function upload()
+    {
+        $this->model->image_link = Cover::getInstance($this->model, 'imageFile');
+        if ($this->validate()) {
+            $this->upload();
+            $this->model->image_link->saveAs('assets/images/' . $this->model->image_link->baseName . '.' . $this->model->image_link->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

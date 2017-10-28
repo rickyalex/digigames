@@ -22,7 +22,7 @@ class CommentsController extends Controller
     {
         if ($this->model->load(Yii::$app->request->post())) {
             $this->model->save();
-            //return $this->redirect(['index']);
+            return $this->redirect(['index']);
         }
         
         return $this->render('create', [
@@ -33,12 +33,12 @@ class CommentsController extends Controller
     public function actionSubmit()
     {
         if ($this->model->load(Yii::$app->request->post())) {
-            $this->model->save();
-            //return $this->redirect(['index']);
+            if($model->validate())
+            {
+                $this->model->save();
+            }
+            return $this->redirect(['index']);
         }
-        return $this->render('index', [
-            'model' => $this->model
-        ]);
     }
 
     public function actionIndex()

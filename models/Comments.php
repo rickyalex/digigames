@@ -52,4 +52,9 @@ class Comments extends ActiveRecord
             'created_by' => 'Created By',
         ];
     }
+    
+    public function setDate(){
+        $this->date_created = Date('Y-m-d h:i:s');
+        return $this->date_created;
+    }
 }

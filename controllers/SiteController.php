@@ -59,6 +59,19 @@ class SiteController extends Controller
             ],
         ];
     }
+    
+    public $usersModel;
+    public $coverModel;
+    public $commentsModel;
+    public $gameModel;
+    
+    public function __construct($id, $module, $config = array()) {
+        $this->usersModel = new Users();
+        $this->coverModel = new Cover();
+        $this->commentsModel = new Comments();
+        $this->gameModel = new Game();
+        parent::__construct($id, $module, $config);
+    } 
 
     /**
      * Displays homepage.
@@ -82,11 +95,14 @@ class SiteController extends Controller
      */
     public function actionDetail($id)
     {
+        if ($this->commentsModel->load(Yii::$app->request->post())) {
+                $this->commentsModel->setDate();
+                $this->commentsModel->save();
+                return $this->redirect(['site/detail', 'id' =>$id]);
+        }
+        
         $result = Game::findOne($id);
         $comments = Comments::find()->where(['game_id' => $id])->all();
-        $commentModel = new Comments();
-        $gameModel = new Game();
-        $usersModel = new Users();
         foreach($result as $row => $item){
             $game[$row] = $item;
         }
@@ -94,9 +110,9 @@ class SiteController extends Controller
         return $this->render('detail', [
             'game' => $game,
             'comments' => $comments,
-            'commentModel' => $commentModel,
-            'gameModel' => $gameModel,
-            'usersModel' => $usersModel
+            'commentModel' => $this->commentsModel,
+            'gameModel' => $this->gameModel,
+            'usersModel' => $this->usersModel
         ]);
     }
 
@@ -133,20 +149,19 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new Users();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->setPassword($model->password);
-            $model->setDatecreated();
-            $model->generateAuthKey();
-            if($model->validate())
+        if ($this->usersModel->load(Yii::$app->request->post())) {
+            $this->usersModel->setPassword($this->usersModel->password);
+            $this->usersModel->setDatecreated();
+            $this->usersModel->generateAuthKey();
+            if($this->usersModel->validate())
             {
-                $model->save();
+                $this->usersModel->save();
                 \Yii::$app->session->setFlash('success',"You have signed up successfully. To have more fun, proceed by logging-in");
                 return $this->redirect(['site/login']);
             }
         }
         return $this->render('register', [
-            'model' => $model,
+            'model' => $this->usersModel,
         ]);
     }
     

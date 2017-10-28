@@ -34,8 +34,9 @@ class Game extends ActiveRecord {
     public function rules() {
         return [
             [['date_created'], 'safe'],
-            [['title', 'description', 'genre', 'image_link', 'url'], 'string', 'max' => 200],
+            [['title', 'description', 'genre', 'url'], 'string', 'max' => 200],
             [['caption', 'created_by'], 'string', 'max' => 100],
+            [['image_link'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
     }
 
@@ -54,6 +55,16 @@ class Game extends ActiveRecord {
             'date_created' => 'Date Created',
             'created_by' => 'Created By',
         ];
+    }
+    
+    //function to generate random url string
+    public function getLastID(){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+            SELECT MAX(id)+1 as last_id FROM game");
+
+        $result = $command->queryAll();
+        return $result;
     }
     
     
