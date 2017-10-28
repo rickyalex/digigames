@@ -18,7 +18,7 @@ $this->title = 'My Yii Application';
                         <?php } else { ?> <div class="item"> <?php } ?>
                             <img src="<?= $item->image_link ?>" alt="Chania">
                                 <div class="carousel-caption">
-                                    <h3><?php echo $item->caption; ?></h3>
+                                    <h3 class="title"><?php echo $item->caption; ?></h3>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -26,7 +26,7 @@ $this->title = 'My Yii Application';
                         <div class="item active">
                             <img src="assets/images/empty.jpg" alt="Chania">
                             <div class="carousel-caption">
-                                <h3>No Image, please add through the cover module !</h3>
+                                <h3 class="title">No Image, please add through the cover module !</h3>
                             </div>
                         <?php } ?>
                     </div>
@@ -53,7 +53,7 @@ $this->title = 'My Yii Application';
                                 <div class="box-pic">
                                     <a href="<?= $item->url ?>"><img src="<?= $item->image_link ?>" /></a>
                                 </div>
-                                <p class="caption"><b><?php echo $item->caption; ?></b><p>
+                                <p class="caption"><?php echo $item->caption; ?><p>
                             </div>
                         <?php if (($x == $limit) || ($x != 0 && $x/(3*($row+1)) === 1)){ ?> </div> <?php } ?>
                         <?php $x++; endforeach; ?>
@@ -63,7 +63,7 @@ $this->title = 'My Yii Application';
                                 <div class="box-pic">
                                     <img src="assets/images/box_empty.jpg" />
                                 </div>
-                                <p class="caption"><b>No games yet, add through the game module !</b><p>
+                                <p class="caption">No games yet, add through the game module !<p>
                                     </div></div>
                         <?php } ?>
             </div>

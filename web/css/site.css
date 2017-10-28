@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Open+Sans+Condensed:300');
+
 html,
 body {
     height: 100%;
@@ -128,6 +130,7 @@ div.box{
 }
 
 .game-title{
+    font-family: 'Anton', sans-serif;
     display:inline-block;
     background-color:#db0514;
     color:#fff;
@@ -135,6 +138,15 @@ div.box{
     text-align:center;
     vertical-align:middle;
     line-height:40px;
+}
+
+.title{
+    font-family: 'Anton', sans-serif;
+}
+
+.game-description, .game-genre, .comment{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
 }
 
 .game-image{
@@ -151,6 +163,8 @@ p.time{
 }
 
 .box-title{
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
     left:0;
     margin-left:15px;
     position:absolute;
@@ -172,7 +186,14 @@ p.time{
     width:110%;
 }
 
+.navbar {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px;
+}
+
 p.caption {
+  font-family: 'Anton', sans-serif;
+  font-size: 18px;
   position:absolute;
   padding: 20px;
   background-color: #222;

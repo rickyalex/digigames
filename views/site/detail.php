@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <img class="game-image" src="<?= $game['image_link']; ?>"/>
         </div>
         <div class="col-lg-6">
-            <h3>Description</h3>
-            <p><?= $game['description']; ?></p>
-            <h3>Genre</h3>
-            <p><?= $game['genre']; ?></p>
+            <h3 class="title">Description</h3>
+            <p class="game-description"><?= $game['description']; ?></p>
+            <h3 class="title">Genre</h3>
+            <p class="game-genre"><?= $game['genre']; ?></p>
         </div>
     </div>
     
@@ -39,10 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-lg-12">
                     <div class="comment-head">
                         <div class="col-lg-3">
-                            <p><b><?= $usersModel->getUsernameById($item->created_by) ?></b></p>
+                            <p class="title"><?= $usersModel->getUsernameById($item->created_by) ?></p>
                         </div>
                         <div class="col-lg-3">
-                            <p class="time"><b><?= $gameModel->time_ago($item->date_created) ?></b></p>
+                            <p class="title time"><?= $gameModel->time_ago($item->date_created) ?></p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-lg-12">
                     <div class="comment-body">
-                        <p><?= $item->comment ?></p>
+                        <p class="comment"><?= $item->comment ?></p>
                     </div>
                 </div>
             </div>
