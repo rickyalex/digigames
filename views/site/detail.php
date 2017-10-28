@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::submitButton('Submit', ['class' => 'sumbit', 'name' => 'comment-button']) ?>
             <?php ActiveForm::end(); ?>
             <?php } else { ?>
-                <label>Login to comment</label>
+                <?= Html::a('Login to comment', ['site/login'], ['class' => 'btn btn-danger']) ?>
             <?php } ?>
             </div>
             <?php } ?>

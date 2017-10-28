@@ -27,17 +27,16 @@ $this->title = 'Cover';
     'columns' => [
         'id',
         [
+            'attribute' => 'title',
+            'label' => 'Title',
+        ],[
             'attribute' => 'caption',
             'label' => 'Caption',
-            'filter' => false,
         ],
         [
             'attribute' => 'image_link',
             'label' => 'Image Link',
-        ],
-        [
-            'attribute' => 'url',
-            'label' => 'URL',
+            'filter' => false,
         ],
         ['class' => 'yii\grid\ActionColumn'],
     ]

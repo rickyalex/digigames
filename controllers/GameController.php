@@ -25,6 +25,7 @@ class GameController extends Controller
         if ($this->model->load(Yii::$app->request->post())) {
             //get the last ID of the table, the last ID is generated on create
             $last_id = $this->model->getLastID();
+            $this->model->id = $last_id[0]['last_id'];
             //randomize the url
             $this->model->url = 'index.php?r=site%2Fdetail&id='.$last_id[0]['last_id'];
             //get the instance of the image

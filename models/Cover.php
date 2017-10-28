@@ -12,7 +12,6 @@ use yii\data\ActiveDataProvider;
  * @property integer $id
  * @property string $caption
  * @property string $image_link
- * @property string $url
  */
 class Cover extends ActiveRecord
 {
@@ -30,7 +29,7 @@ class Cover extends ActiveRecord
     public function rules()
     {
         return [
-            [['caption', 'url'], 'string', 'max' => 200],
+            [['title','caption'], 'string', 'max' => 200],
             [['image_link'], 'file', 'extensions' => 'png, jpg, jpeg']
         ];
     }
@@ -42,9 +41,9 @@ class Cover extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'title' => 'Title',
             'caption' => 'Caption',
-            'image_link' => 'Image Link',
-            'url' => 'Url',
+            'image_link' => 'Image Link'
         ];
     }
     

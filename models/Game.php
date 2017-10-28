@@ -61,7 +61,7 @@ class Game extends ActiveRecord {
     public function getLastID(){
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("
-            SELECT MAX(id)+1 as last_id FROM game");
+            SELECT IF(EXISTS(SELECT MAX(id)+1 FROM game),1,(SELECT MAX(id)+1 FROM game)) AS last_id");
 
         $result = $command->queryAll();
         return $result;
